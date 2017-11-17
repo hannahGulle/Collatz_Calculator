@@ -1,0 +1,5 @@
+C++ Unsigned Integer Type Max Values
+===================================
+Unsigned Int Max:		4294967295
+Unsigned Long Max:		18446744073709551615
+Unsigned Long Long Max: 	18446744073709551615
