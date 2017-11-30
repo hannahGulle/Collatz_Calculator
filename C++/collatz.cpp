@@ -11,7 +11,6 @@
 
 #include<iostream>
 #include<vector>
-#include<array>
 #include<algorithm>
 
 using namespace std;
@@ -21,7 +20,6 @@ struct Collatz{
 	int length;
 };
 
-void printSequence(vector<unsigned long long int> sequence);
 bool lengthSort(Collatz const& lhs, Collatz const& rhs);
 vector<unsigned long long int> collatz( unsigned long long int start );
 int main(){
@@ -35,35 +33,32 @@ int main(){
 	int size;
 	for(unsigned long long int i = 2; i < end; i++){
 		sequence = collatz(i);
-		size = sequence.size();
+		size = sequence.size()-1;
 		
 		Collatz c = {i, size};
 		all.push_back(c);
 		
 		sequence.clear();	
+
 	}
+
 	// Sorts collatz structs by length of sequence
 	sort( all.begin(), all.end(), &lengthSort );
 
-	int top = 0;
+	int top = 1;
 	for(int i = all.size()-1; i > 1; i--){
+
 		if( all[i].length > all[i-1].length ){
-				cout << " start: " << all[i].start << " \tlength: " << all[i].length << endl;
+			
+			cout << all[i].start << " " << all[i].length << endl;
 			top++;
 		}
-
 		if( top > 10 ){
 			break;
 		}
 	}
 
 	return 0;
-}
-
-void printSequence(vector<unsigned long long int> sequence){
-	for(int i = 0; i < sequence.size(); i++){
-		cout << sequence[i] << endl;
-	}
 }
 
 bool lengthSort(Collatz const& lhs, Collatz const& rhs){
