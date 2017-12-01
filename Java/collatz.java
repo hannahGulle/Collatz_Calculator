@@ -1,17 +1,16 @@
 import java.math.BigInteger;
-import java.util;
 
-public class collatz implements Comparator<collatz> {
+public class collatz {
 
 	private BigInteger start;
-	private BigInteger length;
+	private int length;
 
 	public collatz(){
 		this.start = BigInteger.ZERO;
-		this.length = BigInteger.ZERO;
+		this.length = 0;
 	}
 
-	public collatz(BigInteger start, BigInteger length){
+	public collatz(BigInteger start, int length){
 		this.start = start;
 		this.length = length;
 	}
@@ -20,7 +19,7 @@ public class collatz implements Comparator<collatz> {
 		this.start = start;
 	}
 
-	public void setLength(BigInteger length){
+	public void setLength(int length){
 		this.length = length;
 	} 
 
@@ -28,19 +27,7 @@ public class collatz implements Comparator<collatz> {
 		return this.start;
 	}
 
-	public BigInteger getLength(){
+	public int getLength(){
 		return this.length;
-	}
-
-	public int compareStart(collatz a, collatz b){
-		if( a < b ){
-			return -1;
-		}
-		else if( a == b ){
-			return 0;
-		}
-		else{
-			return 1;
-		}
 	}
 }
