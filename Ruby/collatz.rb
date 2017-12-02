@@ -7,12 +7,12 @@ class Collatz
 	end
 
 	# Length Getter
-	def getLength
+	def length
 		@length
 	end
 
 	# Start Getter
-	def getStart
+	def start
 		@start
 	end
 end
@@ -32,6 +32,7 @@ def getCollatz(start)
 	return sequence
 end
 
+
 endVal = 10000
 allseq = []
 2.step(endVal,1) do |i|
@@ -44,13 +45,13 @@ allseq = []
 	sequence.clear
 end
 
-allseq.sort do |a,b| a.getLength <=> b.getLength end
+allseq = allseq.sort_by &:length
 
 top = 1
 
 (allseq.length-1).step(1, -1) do |i|
-	if allseq[i].getLength > allseq[i-1].getLength then
-		puts "#{ allseq[i].getStart } #{ allseq[i].getLength }"
+	if allseq[i].length > allseq[i-1].length then
+		puts "#{ allseq[i].start } #{ allseq[i].length }"
 		top = top + 1
 	end
 	if top > 10 then
