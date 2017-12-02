@@ -4,12 +4,6 @@ class collatz:
 	def __init__(self, Start, Length):
 		self.Start = Start
 		self.Length = Length
-	
-	def getStart(self):
-		return self.Start
-
-	def getLength(self):
-		return self.Length
 
 
 def getCollatz(start):
@@ -25,25 +19,30 @@ def getCollatz(start):
 
 
 end = int(10000)
-
-all = []
-
+allseq = []
 for i in range(2,end):
 	sequence = getCollatz(i)
 	size = len(sequence)-1
 
-	c = collatz(i, size)
-	all.append( c )
+	c = collatz(int(i), int(size))
+	allseq.append( c )
 
 	sequence[:] = []
 
-sorted(all, key=lambda collatz: collatz.Length)
+allseq.sort(key=lambda collatz: collatz.Length)
 
-top = 1;
-
-for i in range( len(all)-1 , 1 ):
-	if all[i].Length > all[i-1].Length:
-		print( all[i].Start + ' ' + all[i].Length )
-		top = top + 1
+top = int(1);
+for i in range( len(allseq)-1 , 1 , -1):
+	if allseq[i].Length > allseq[i-1].Length:
+		print( allseq[i].Start, allseq[i].Length )
+		top += 1
 	if top > 10 :
 		break
+
+
+
+
+
+
+
+
