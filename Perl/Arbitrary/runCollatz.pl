@@ -4,16 +4,25 @@ use collatz;
 
 my $end = 10000;
 my @all = ();
-my @sequence = ();
+my @seq = ();
 my $col;
+
+my @temp = ( 12 );
+my @test = getCollatz( 12 , \@temp );
+print scalar(@test)-1 . "\n";
+
+
+for( my $i = 0; $i < scalar(@test)-1; $i++){
+	print @test[$i] . "\n";
+}
 
 for( my $i = 2; $i < $end; $i++ ){
 
-	@sequence = ($i);
-	@sequence = getCollatz( $i, \@sequence );
-	$col = new collatz( $i, scalar(@sequence)-1 );
+	@seq = ($i);
+	@seq = getCollatz( $i, \@seq );
+	$col = new collatz( $i, scalar(@seq)-1 );
 	push @all, $col;
-	@sequence = ();
+	@seq = ();
 }
 
 @all = sort {
@@ -43,11 +52,13 @@ sub getCollatz {
 		return @sequence;
 	}
 	elsif( $start % 2 == 0 ){
-		push @sequence, $start/2;
-		return getCollatz( $start/2, \@sequence );
+		$start = $start/2;
+		push @sequence, $start;
+		return getCollatz( $start, \@sequence );
 	}
 	else{
-		push @seqeuence, (3*$start)+1 ;
-		return getCollatz( (3*$start)+1, \@sequence );
+		$start = ($start * 3)+1;
+		push @sequence, $start;
+		return getCollatz( $start, \@sequence );
 	}
 }
