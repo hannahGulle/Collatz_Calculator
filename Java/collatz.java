@@ -1,33 +1,31 @@
-import java.math.BigInteger;
-
 public class collatz {
 
-	private BigInteger start;
-	private int length;
+	private long start;
+	private long length;
 
 	public collatz(){
-		this.start = BigInteger.ZERO;
+		this.start = 0;
 		this.length = 0;
 	}
 
-	public collatz(BigInteger start, int length){
+	public collatz(long start, long length){
 		this.start = start;
 		this.length = length;
 	}
 
-	public void setStart(BigInteger start){
+	public void setStart(long start){
 		this.start = start;
 	}
 
-	public void setLength(int length){
+	public void setLength(long length){
 		this.length = length;
 	} 
 
-	public BigInteger getStart(){
+	public long getStart(){
 		return this.start;
 	}
 
-	public int getLength(){
+	public long getLength(){
 		return this.length;
 	}
 }

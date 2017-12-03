@@ -7,25 +7,22 @@ public class runCollatz{
 	public static void main(String[] args){
 
 		// The height of the sequence start values
-		BigInteger end = new BigInteger("10000");
+		long end = 10000;	
 		System.out.println("Finding 10 longest sequences between 1 and " + end);
 
 		// Holds all Collatz Objects found between 2 and the end
 		ArrayList<collatz> all = new ArrayList<collatz>();		
 		// Holds the elements of the current collatz sequence
-		ArrayList<BigInteger> sequence = new ArrayList<BigInteger>();
+		ArrayList<Long> sequence = new ArrayList<Long>();
 
 		// Holds the size of the current collatz sequnce
-		int size;
-		BigInteger temp;
-		for( int i = 2; i < end.intValue() ; i++ ){
+		long size;
+		for( long i = 2; i < end ; i++ ){
 
-			temp = BigInteger.valueOf(i);
-		
-			sequence = Collatz(temp);
+			sequence = Collatz(i);
 			size = sequence.size()-1;
 
-			all.add(new collatz(temp, size));
+			all.add(new collatz(i, size));
 		
 			sequence.clear();		
 		}
@@ -37,7 +34,7 @@ public class runCollatz{
 		for( int j = all.size()-1; j > 1; j-- ){
 
 			if( all.get(j).getLength() > all.get(j-1).getLength() ){
-				System.out.println( (all.get(j).getStart()).toString() + " " + all.get(j).getLength() );
+				System.out.println( all.get(j).getStart() + " " + all.get(j).getLength() );
 				top++;
 			}
 			if( top > 10 ){
@@ -46,22 +43,17 @@ public class runCollatz{
 		}
 	}
 
-	public static ArrayList<BigInteger> Collatz( BigInteger start ){
+	public static ArrayList<Long> Collatz( long start ){
 		
-		ArrayList<BigInteger> sequence = new ArrayList<BigInteger>();
+		ArrayList<Long> sequence = new ArrayList<Long>();
 		sequence.add( start );
 
-		BigInteger zero, one, two, three;
-		one = BigInteger.valueOf(1); two = BigInteger.valueOf(2);
-		three = BigInteger.valueOf(3); zero = BigInteger.valueOf(0);
-
-		while( !start.equals( one ) ){
-
-			if( start.mod( two ) == zero ){
-				start = start.divide( two );
+		while( start != 1 ){
+			if( start % 2 == 0 ){
+				start = start / 2;
 			}
 			else{
-				start = (start.multiply( three )).add( one );
+				start = (start * 3)+1;
 			}
 			sequence.add( start );
 		}
