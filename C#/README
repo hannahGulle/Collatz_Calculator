@@ -1,0 +1,9 @@
+
+
+TO COMPILE:
+	mcs collatz_arb.cs -r:System.Numerics
+	mcs collatz.cs
+
+TO RUN:	
+	mono collatz_arb.exe
+	mono collatz.exe
