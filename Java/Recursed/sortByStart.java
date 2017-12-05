@@ -1,13 +1,14 @@
 // Hannah Gulle
 import java.util.*;
 
-public class sortByLength implements Comparator<collatz>{
+public class sortByStart implements Comparator<collatz>{
 
 	public int compare( collatz a, collatz b ){
-		if( a.getLength() > b.getLength() ){
+
+		if( a.getStart() > b.getStart() ){
 			return 1;
 		}
-		else if( a.getLength() < b.getLength() ){
+		else if( a.getStart() < b.getStart() ){
 			return -1;
 		}
 		else{
