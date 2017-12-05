@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+# Hannah Gulle
+# collatz object
 package collatz;
 sub new {
 
@@ -13,6 +15,7 @@ sub new {
 	return $self;
 }
 
+# sets the start value of a given sequence
 sub setStart {
 	
 	my ($self, $start ) = @_;
@@ -20,6 +23,7 @@ sub setStart {
 	return $self->{_start};
 }
 
+# sets the size of a given sequence
 sub setSize {
 
 	my ($self, $size ) = @_;
@@ -27,12 +31,14 @@ sub setSize {
 	return $self->{_size};
 }
 
+# returns the start of a given sequence
 sub getStart {
 
 	my( $self ) = @_;
 	return $self->{_start};
 }
 
+# returns the size of a given sequence
 sub getSize {
 
 	my( $self ) = @_;
