@@ -4,14 +4,14 @@ CSC 330 Project 3 "The Collatz Conjecture"
 COMPILE AND RUN
 C++     c++ collatz.cpp
         ./a.out
-Java    javac collatz.java
-        java collatz
-C#      mcs collatz.cs -r:System.Numerics
-        mono collatz.exe
+Java    javac runcollatz.java
+        java runcollatz
+C#      mcs runcollatz.cs -r:System.Numerics
+        mono runcollatz.exe
 F2015   gfortran collatz.f90 
 	./a.out
-Ada     gnat make -f collatz.adb
-        collatz
+Ada     gnat make -f runcollatz.adb
+        runcollatz
 Perl    chmod u+x collatz.pl
         collatz.pl
 Python  chmod u+x collatz.py
