@@ -39,6 +39,7 @@ begin
 end swap;
 
 -- Sorts the Collatz Struct Array by Struct Length
+-- Using: Selection Sort
 function sortbyLength( allseq: in out collatzArr; endval: Integer ) return collatzArr is
 j : Integer;
 begin
@@ -57,6 +58,7 @@ return allseq;
 end sortbyLength;
 		 
 -- Sorts the Collatz Struct Array by Struct Start
+-- Using: Selection Sort
 function sortbyStart( allseq: in out collatzArr; endval: Integer ) return collatzArr is
 j : Integer;
 begin
@@ -74,7 +76,7 @@ begin
 return allseq;
 end sortbyStart;
 
--- Determines the Collatz Sequence for the starting value (start)
+-- Determines the Collatz Sequence for the starting value (start) Recursively
 function getCollatz( start: in out Integer; seqSize: in out Integer) return Integer is
 begin
 
@@ -108,7 +110,7 @@ begin
 
 -- Constructs the collatz object for each starting value from 2 to the highest
 -- end value
-for i in 2 .. 10000 loop
+for i in 2 .. endval loop
 
 	start := i;
 	seqSize := 0;
