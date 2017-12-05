@@ -1,14 +1,20 @@
+// Hannah Gulle
+// Computes the top 10 collatz sequence lengths for a given range.
+// Requires Classes: collatz.java, sortByLength.java, sortByStart.java
+
 import java.math.*;
 import java.util.*;
 import java.lang.Object;
 
+// Main Program
 public class runCollatz{
 
 	public static void main(String[] args){
 
 		// The height of the sequence start values
-		long end = 10000;	
-		System.out.println("Finding 10 longest sequences between 1 and " + end);
+		System.out.println("Input the Highest Starting Value");
+		Scanner in = new Scanner(System.in);
+		long end = in.nextLong();
 
 		// Holds all Collatz Objects found between 2 and the end
 		ArrayList<collatz> all = new ArrayList<collatz>();		
@@ -27,13 +33,18 @@ public class runCollatz{
 			sequence.clear();		
 		}
 
+		System.out.println("Top 10 Starting Values After Sorting by Length");
+
 		// Sort in ascending order by sequence length
 		Collections.sort(all, new sortByLength());	
 
+		// Holds top 10 values
+		ArrayList<collatz> topTen = new ArrayList<collatz>();
 		int top = 1;
 		for( int j = all.size()-1; j > 1; j-- ){
 
 			if( all.get(j).getLength() > all.get(j-1).getLength() ){
+				topTen.add( all.get(j) );
 				System.out.println( all.get(j).getStart() + " " + all.get(j).getLength() );
 				top++;
 			}
@@ -41,8 +52,19 @@ public class runCollatz{
 				break;
 			}
 		}
+		
+		System.out.println("\nTop 10 Starting Values After Sorting by Start");
+
+		// Sort top 10 values by starting value
+		Collections.sort( topTen, new sortByStart());
+		
+		// outputs the top 10 after sorting by starting value
+		for( int i = 9; i > -1; i-- ){
+			System.out.println( topTen.get(i).getStart() + " " + topTen.get(i).getLength() );
+		}
 	}
 
+	// Calculates the collatz sequence for a given starting value
 	public static ArrayList<Long> Collatz( long start ){
 		
 		ArrayList<Long> sequence = new ArrayList<Long>();
