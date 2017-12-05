@@ -81,7 +81,7 @@ int main(){
 	cout << "\n Top 10 Starting Values After Sorting By Start" << endl;
 
 	// outputs top 10 starting values after sorting by start
-	for( int i = 9; i > 0; i-- ){
+	for( int i = 9; i > -1; i-- ){
 		cout << topTen[i].start << " " << topTen[i].length << endl;
 	}
 
