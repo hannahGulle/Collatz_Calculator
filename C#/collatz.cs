@@ -53,13 +53,10 @@ namespace CollatzSequence{
 		static void Main(){
 
 			// Retrieve the Highest Starting Integer from the User
-/*
 			Console.WriteLine("Input the Highest Starting Integer");
 			string value = Console.ReadLine();
-			int intEnd = Convert.ToInt64(value)
-			ulong end = intEnd;
-*/
-			ulong end = 10000;
+			ulong end = UInt64.Parse(value);
+
 		
 			// List Holds all Collatz Objects from 2 to the Highest Starting Integer
 			List<collatz> all = new List<collatz>();
@@ -112,7 +109,7 @@ namespace CollatzSequence{
 
 			// Output the top 10 starting integers from the list after
 			// sorting by length value
-			for( int i = 9; i > 0; i-- ){
+			for( int i = 9; i > -1; i-- ){
 				Console.WriteLine(" {0} {1}", topTen[i].getStart(), topTen[i].getLength());
 			}	
 		}
