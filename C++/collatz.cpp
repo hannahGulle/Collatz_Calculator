@@ -31,11 +31,10 @@ vector<unsigned long long int> collatz( unsigned long long int start );
 // Main Program
 int main(){
 
-	//TODO USER INPUT
-
-	// The height of the sequence start values
-	unsigned long long int end = 10000;
-	cout << "Finding 10 longest sequences between 1 and " << end << "." << endl;
+	// Retrieves the highest starting value from the user
+	unsigned long long int end;
+	cout << "Enter Highest Starting Value: ";
+	cin >> end;
 
 	// collatz struct vector holds all objects within computation starting range
 	vector<Collatz> all;
