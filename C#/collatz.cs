@@ -112,7 +112,7 @@ namespace CollatzSequence{
 
 			// Output the top 10 starting integers from the list after
 			// sorting by length value
-			for( int i = 0; i < 10; i++ ){
+			for( int i = 9; i > 0; i-- ){
 				Console.WriteLine(" {0} {1}", topTen[i].getStart(), topTen[i].getLength());
 			}	
 		}
