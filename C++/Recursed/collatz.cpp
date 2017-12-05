@@ -1,27 +1,42 @@
+// Hannah Gulle
+// Computes the top 10 starting values from 2 to a given positive index
+// by collatz sequence length and starting value recursively
+
 #include<iostream>
 #include<vector>
 #include<algorithm>
 
 using namespace std;
 
+// collatz struct holds sequence start and sequence length
 struct Collatz{
 	unsigned long long int start;
 	unsigned long long int length;
 };
 
+// Sorting Methods
+bool startSort(Collatz const& lhs, Collatz const& rhs);
 bool lengthSort(Collatz const& lhs, Collatz const& rhs);
+
+// Collatz Computation Method
 vector<unsigned long long int> collatz( vector<unsigned long long int> sequence, unsigned long long int start );
+
+// Main Program
 int main(){
 
-	// Retrieve 
+	// Retrieves the maximum starting integer from the keyboard
 	unsigned long long int max;
-	cout << "Enter the maximum positive integer: ";
+	cout << "Enter the Highest Starting Integer: ";
 	cin >> max;
 
+	// vector of all collatz objects within computation range
 	vector<Collatz> all;
+	// vector of all collatz sequence values for a given starting value
 	vector<unsigned long long int> sequence;
+	// length of a given sequence
 	unsigned long long int length;
 	
+	// computes the collatz sequence for each starting value within range
 	for(unsigned long long int i = 2; i < max; i++ ){
 		sequence.push_back(i);
 		sequence = collatz( sequence, i );
@@ -33,11 +48,16 @@ int main(){
 		sequence.clear();
 	}
 
+	cout << "Top 10 Starting Values After Sorting by Length" << endl;
+	// sorts all collatz objects by sequence length
 	sort( all.begin(), all.end(), &lengthSort );
 
+	// Calculates and Outputs the top 10 starting values after sorting by length
 	int top = 1;
+	vector<Collatz> topTen;
 	for(int i = all.size()-1; i > 1; i--){
 		if( all[i].length > all[i-1].length){
+			topTen.push_back( all[i] );
 			cout << all[i].start << " " << all[i].length << endl;
 			top++;
 		}
@@ -47,15 +67,28 @@ int main(){
 		}
 	}	
 
+	cout << "\n Top 10 Starting Values After Sorting by Start" << endl;
+	// sorts top 10 collatz objects by sequence start
+	sort( topTen.begin(), topTen.end(), &startSort );
 
-
+	for( int i = 9; i > 0; i-- ){
+		cout << topTen[i].start << " " << topTen[i].length << endl;
+	}
+	
 	return 0;
 }
 
+// Sorting Method: Sorts collatz objects by starting value
+bool startSort(Collatz const& lhs, Collatz const& rhs){
+	return lhs.start < rhs.start;
+}
+
+// Sorting Method: sorts collatz objects by length
 bool lengthSort(Collatz const& lhs, Collatz const& rhs){
 	return lhs.length < rhs.length;
 }
 
+// recursively determines the collatz sequence for a given starting value
 vector<unsigned long long int> collatz( vector<unsigned long long int> sequence, unsigned long long int start ){
 
 	if( start == 1 ){
