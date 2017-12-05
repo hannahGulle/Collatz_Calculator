@@ -25,6 +25,7 @@ type collatz is record
 end record;
 type collatzArr is array ( Natural range <> ) of collatz;
 
+topTen		: collatzArr(1..10);	-- Collatz Struct Array of top 10 Structs
 c 		: collatz;	-- Collatz Struct Variable
 seqSize 	: Integer;	-- Size of the Current Collatz Sequence
 start, top 	: Integer;	-- Initial Position Variable
@@ -124,6 +125,7 @@ top := 1;
 for i in reverse 1 .. endval loop
 
 	if( allseq(i).length > allseq(i-1).length ) then
+		topTen(top) := allseq(i);
 		Put_Line( natural'image(allseq(i).start) & " " & natural'image(allseq(i).length));
 		top := top + 1;
 	end if;
@@ -137,19 +139,12 @@ Put_Line("");
 Put_Line("Top 10 Starting Values After Sorting by Start");
 
 -- Sorts collatz struct array by Start
-allseq := sortbyStart( allseq, endval );
+topTen := sortbyStart( topTen, 10 );
 
 -- Prints the top 10 lengths after sorting by start
-top := 1;
-for i in reverse 1 .. endval-1 loop
+for i in reverse 1 .. 10 loop
 
-	if( allseq(i).length > allseq(i-1).length ) then
-		Put_Line( natural'image(allseq(i).start) & " " & natural'image(allseq(i).length));
-		top := top + 1;
-	end if;
-	if( top > 10 ) then
-		exit;
-	end if;
+	Put_Line( natural'image(topTen(i).start) & " " & natural'image(topTen(i).length));
 end loop;
 end;
 end runCollatz;
