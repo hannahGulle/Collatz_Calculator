@@ -3,27 +3,34 @@
 -- positive integer value.
 -- November 27, 2017
 
+-- Implements the Following Features
+-- Ada Dynamic Array
+-- Ada Typing
+-- Ada Records
+
 with Ada.Text_IO; use Ada.Text_IO;
 
 
-
+-- Main Program
 procedure runCollatz is
 
-endval : Integer := 10000;
+-- Retrieve the Highest Integer Starting Value from the User
+endval: Integer;
 
+-- C like struct "Collatz" holds the starting position
+-- and collatz sequence length
 type collatz is record
 	start : Integer;
 	length : Integer;
 end record;
-type collatzArr is array ( 1..endval ) of collatz;
+type collatzArr is array ( Natural range <> ) of collatz;
+
+c 		: collatz;	-- Collatz Struct Variable
+seqSize 	: Integer;	-- Size of the Current Collatz Sequence
+start, top 	: Integer;	-- Initial Position Variable
 
 
-allseq : collatzArr;
-c : collatz;
-seqSize : Integer;
-start, top : Integer;
-
-
+-- Swap Procedure used during the Sorting of the Collatz Struct Array
 procedure swap( x,y : in out collatz) is
 	temp: collatz;
 begin
@@ -33,7 +40,8 @@ begin
 end swap;
 
 
-function sort( allseq: in out collatzArr; endval: Integer ) return collatzArr is
+-- Sorts the Collatz Struct Array by Struct Length
+function sortbyLength( allseq: in out collatzArr; endval: Integer ) return collatzArr is
 j : Integer;
 begin
 	for i in 1 .. endval-1 loop
@@ -48,18 +56,48 @@ begin
 	end if;
 	end loop;
 return allseq;
-end sort;
+end sortbyLength;
 		 
 
+-- Sorts the Collatz Struct Array by Struct Start
+function sortbyStart( allseq: in out collatzArr; endval: Integer) return collatzArr is
+j : Integer;
+begin
+	for i in 1 .. endval-1 loop
+	j := i;
+	for c2 in i+1 .. endval loop
+		if( allseq(c2).start < allseq(j).start) then
+			j := c2;
+		end if;
+	end loop;
+	if( j /= i ) then
+		swap(allseq(i), allseq(j));
+	end if;
+	end loop;
+return allseq;
+end sortbyStart;
 
-
+-- ******************** MAIN PROGRAM BEGINS *********************** --
 begin
 
-for i in 2 .. 10000 loop
+-- Retrieve the Size of the Collatz Array of Structs
+Put_Line("Input the Hightest Integer Starting Value");
+endval := Integer'value(Get_Line);
+Put_Line("");
+
+-- Dynamically Allocated Array Determines the Size of the Collatz Array 
+-- after Runtime
+declare
+allseq 		: collatzArr(1..endval);-- Array of ALL Collatz Structs
+begin
+
+-- Constructs a collatz object for each starting value from 2 to the highest end value
+for i in 2 .. endval loop
 
 	start := i;
 	seqSize := 0;
 
+	-- Determine the Collatz Seqeuence for the starting value (start)
 	while( start /= 1 ) loop
 		if(  start mod 2 = 0 ) then
 			start := start / 2;
@@ -68,15 +106,22 @@ for i in 2 .. 10000 loop
 		end if;
 		seqSize := seqSize + 1;
 	end loop;
+	
+	-- Provide the collatz start and sequence size to the collatz
+	-- object c for insertion in the collatz array (allseq)
 	c.start := i;
 	c.length := seqSize;
 	allseq( i-1 ) := c; 
 end loop;
 
-allseq := sort( allseq, endval );
+Put_Line("Top 10 Starting Values After Sorting by Length");
 
+-- Sorts collatz struct array by Length
+allseq := sortbyLength( allseq, endval );
+
+-- Prints the top 10 lengths after sorting by length
 top := 1;
-for i in reverse 1 .. 10000 loop
+for i in reverse 1 .. endval loop
 
 	if( allseq(i).length > allseq(i-1).length ) then
 		Put_Line( natural'image(allseq(i).start) & " " & natural'image(allseq(i).length));
@@ -88,4 +133,23 @@ for i in reverse 1 .. 10000 loop
 
 end loop;
 
+Put_Line("");
+Put_Line("Top 10 Starting Values After Sorting by Start");
+
+-- Sorts collatz struct array by Start
+allseq := sortbyStart( allseq, endval );
+
+-- Prints the top 10 lengths after sorting by start
+top := 1;
+for i in reverse 1 .. endval-1 loop
+
+	if( allseq(i).length > allseq(i-1).length ) then
+		Put_Line( natural'image(allseq(i).start) & " " & natural'image(allseq(i).length));
+		top := top + 1;
+	end if;
+	if( top > 10 ) then
+		exit;
+	end if;
+end loop;
+end;
 end runCollatz;
