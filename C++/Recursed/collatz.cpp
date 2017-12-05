@@ -71,7 +71,7 @@ int main(){
 	// sorts top 10 collatz objects by sequence start
 	sort( topTen.begin(), topTen.end(), &startSort );
 
-	for( int i = 9; i > 0; i-- ){
+	for( int i = 9; i > -1; i-- ){
 		cout << topTen[i].start << " " << topTen[i].length << endl;
 	}
 	
