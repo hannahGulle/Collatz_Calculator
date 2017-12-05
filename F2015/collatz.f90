@@ -94,7 +94,7 @@ do i=2, 10
         topTen(j+1) = temp
 end do
 
-print *, "\nTop 10 Starting Values After Sorting by Start"
+print *, "Top 10 Starting Values After Sorting by Start"
 ! Output top 10 after sorting by start
 do i=10, 1, -1
         print *, topTen(i)%start, topTen(i)%length
