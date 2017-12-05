@@ -50,9 +50,10 @@ namespace CollatzSequence{
 
 		static void Main(){
 
-			// TODO User input
-
-			ulong end = 10000;
+			// Retrieve the highest starting integer from the user keyboard
+			Console.WriteLine("Input the Highest Starting Integer");
+			string value = Console.ReadLine();
+			ulong end = UInt64.Parse(value);
 
 			// List of all collatz objects from a given start and with a
 			// computed sequence length
@@ -103,11 +104,12 @@ namespace CollatzSequence{
 			});		
 
 			// outputs the top 10 collatz starting values after sorting by start
-			for( int i = 9; i > 0; i-- ){
+			for( int i = 9; i > -1; i-- ){
 				Console.WriteLine("{0} {1}", topTen[i].getStart(), topTen[i].getLength());
 			}
 		}
-	
+
+		// Recursively creates the collatz sequence for a given starting value	
 		public static List<ulong> Collatz( List<ulong> sequence, ulong start ){
 
 			if( start == 1 ){
