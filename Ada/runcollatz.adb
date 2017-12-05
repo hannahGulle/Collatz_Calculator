@@ -143,7 +143,6 @@ topTen := sortbyStart( topTen, 10 );
 
 -- Prints the top 10 lengths after sorting by start
 for i in reverse 1 .. 10 loop
-
 	Put_Line( natural'image(topTen(i).start) & " " & natural'image(topTen(i).length));
 end loop;
 end;
